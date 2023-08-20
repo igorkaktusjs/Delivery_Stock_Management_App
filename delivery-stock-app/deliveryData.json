@@ -1,0 +1,149 @@
+{
+  "stock_product": [
+    {
+      "id": 1,
+      "name": "Latte",
+      "type": "drink",
+      "tags": [
+        "Drinks ",
+        "Coffee ",
+        "Hot Drinks "
+      ],
+      "online": false,
+      "delivery": true
+    },
+    {
+      "id": 2,
+      "name": "Flat White",
+      "type": "drink",
+      "tags": [
+        "Drinks ",
+        "Coffee ",
+        "Hot Drinks "
+      ],
+      "online": false,
+      "delivery": true
+    },
+    {
+      "id": 3,
+      "name": "Cappuccino",
+      "type": "drink",
+      "tags": [
+        "Drinks",
+        "Coffee",
+        "Hot Drinks"
+      ],
+      "online": true,
+      "delivery": true
+    },
+    {
+      "id": 4,
+      "name": "Long Black",
+      "type": "drink",
+      "tags": [
+        "Drinks",
+        "Coffee ",
+        "Hot Drinks"
+      ],
+      "online": false,
+      "delivery": true
+    },
+    {
+      "id": 5,
+      "name": "Breakfast Tea",
+      "type": "drink",
+      "tags": [
+        "Drinks",
+        "Tea",
+        "Hot Drinks"
+      ],
+      "online": false,
+      "delivery": true
+    },
+    {
+      "id": 6,
+      "name": "Soho Bun",
+      "type": "food",
+      "tags": [
+        "Drinks",
+        "Tea",
+        "Cold Drinks"
+      ],
+      "online": false,
+      "delivery": false
+    }
+  ],
+  "filters": [
+    {
+      "type": "All",
+      "name": "All categories",
+      "id": 0
+    },
+    {
+      "type": "drink",
+      "name": "Drink",
+      "id": 1
+    },
+    {
+      "type": "drink",
+      "name": "Tea",
+      "id": 2
+    },
+    {
+      "type": "drink",
+      "name": "Coffe",
+      "id": 3
+    },
+    {
+      "type": "drink",
+      "name": "Cold Drinks",
+      "id": 4
+    },
+    {
+      "type": "sweet",
+      "name": "Sweet",
+      "id": 5
+    },
+    {
+      "type": "food",
+      "name": "Sandwiches",
+      "id": 6
+    },
+    {
+      "type": "food",
+      "name": "Salads",
+      "id": 7
+    },
+    {
+      "type": "food",
+      "name": "Savoury",
+      "id": 8
+    }
+  ],
+  "filtersStock": [
+    {
+      "name": "All Products",
+      "type": "All",
+      "id": 111233
+    },
+    {
+      "name": "In Stock",
+      "type": true,
+      "id": 23131
+    },
+    {
+      "name": "Out of Stock",
+      "type": false,
+      "id": 34325467
+    }
+  ],
+  "stock": [
+    {
+      "stockOnline": true,
+      "stockDelivery": true,
+      "searchProduct": "",
+      "filterProduct": [],
+      "statusFoundProduct": true
+    }
+  ]
+}
