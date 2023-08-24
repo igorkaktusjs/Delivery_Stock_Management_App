@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, {useState} from 'react'
 import NotFoundModal from '../UI/NotFoundModal';
+import Spinner from '../UI/spinner';
 
 //style
 import styled from 'styled-components' 
@@ -8,38 +9,57 @@ import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill } from 'react-ico
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import {onlineAll, deliveryAll, fetchStock, currentUpdateData, onlineItemTrigger, deliveryItemTrigger} from '../store/stockSlice'
+import {
+    onlineAll,
+    deliveryAll,
+    fetchStock,
+    currentUpdateData,
+    onlineItemTrigger,
+    deliveryItemTrigger
+  } from '../store/stockSlice'
+
+import {
+    useGetAllStockQuery,
+    useTriggerItemDeliveryMutation,
+    useTriggerItemOnlineMutation,
+    useTriggerAllOnlineMutation,
+    useTriggerStockOnlineMutation
+    } from '../store/ApiSlice';
 
 const StockManagement = (props) => {
+
+  const [updateAllDate, setUpdateAllDate] = useState([])
 
   const { data, searchProduct, currentFilterTag, currentData,stockOnline, stockDelivery} = useSelector(state => state.stock);
   const { filtersStock } = useSelector(state => state.filterStock);
 
+  
+  const {
+    data: getAllStock,
+    isLoading,
+    isError,
+}  = useGetAllStockQuery();
+
+ const [triggerItemDelivery]  = useTriggerItemDeliveryMutation();
+ const [triggerItemOnline]  = useTriggerItemOnlineMutation();
+ const [triggerAllOnline] = useTriggerAllOnlineMutation();
+ const [triggerStockOnline] = useTriggerStockOnlineMutation();
+
   const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(fetchStock());
-      },[])
-
-    const OnlineAllTrigger = () => {
-      dispatch(onlineAll());
-    }
 
     const DeliveryAllTrigger = () => {
       dispatch(deliveryAll());
     }
 
-    const OnlineItemTrigger = (id) => {
-        dispatch(onlineItemTrigger(id));
+      if(isLoading){
+        return <Spinner/>
+      }else if(isError) {
+        return <h5>Error</h5>
       }
-
-    const DeliveryItemTrigger = (id) => {
-        dispatch(deliveryItemTrigger(id));
-      }
-
       let searchData = '';
-      searchData = data.filter(item => item.name.toLowerCase().includes(searchProduct));
+      searchData = getAllStock.filter(item => item.name.toLowerCase().includes(searchProduct));
   
+      
       let filterTagData = '';
       if (currentFilterTag === 'All'){
          filterTagData = searchData;
@@ -53,15 +73,35 @@ const StockManagement = (props) => {
       } else {
         filterStockData = filterTagData.filter(item => item.online === filtersStock || item.delivery === filtersStock )
       } 
+      console.log(filterStockData);
+
+     const chendgeAllOnline = () => {
+       let updateData = [];
+      filterStockData.map(item => {
+        updateData =  item.online ===!item.online
+        return updateData;
       
-      useEffect(()=>{
-        dispatch(currentUpdateData(filterStockData));
-      },[searchProduct, currentFilterTag, filtersStock])
+       })
+       console.log(updateData);
+       setUpdateAllDate(updateData);
+       triggerStockOnline(!stockOnline);
+       console.log(stockOnline);
+      
+      }
+       
+       
+     
+        
+
+
+      // useEffect(()=>{
+      //   dispatch(currentUpdateData(filterStockData));
+      // },[searchProduct, currentFilterTag, filtersStock])
 
         
       let products = '';
 
-      if(currentData.length === 0 ) {
+      if(currentData.length === 0 || isLoading ) {
         return <NotFoundModal/>
       } else {
         products = filterStockData.map(item => (
@@ -70,12 +110,12 @@ const StockManagement = (props) => {
               <td>{item.type}</td>
               <td className='tags'>{item.tags.map((tag,i) => (<p key={tag[i]}>{tag}</p>))}</td>
               <td><Button
-                  onClick={() => OnlineItemTrigger(item.id)} 
+                  onClick={() => triggerItemOnline({id: item.id, online: !item.online })} 
                   className={item.online ? 'green btn btn-success' : 'red btn btn-success'}>
                   {item.online ? 'On' : 'Off'}
                   </Button></td>
               <td><Button
-                  onClick={() => DeliveryItemTrigger(item.id)}
+                  onClick={() => triggerItemDelivery({id: item.id, delivery: !item.delivery})}
                   className={item.delivery ? 'green btn btn-success' : 'red btn btn-success'}>
                   {item.delivery ? 'On' : 'Off'}
                   </Button></td>
@@ -96,7 +136,7 @@ const StockManagement = (props) => {
             <th scope="col">Online<p> 
                 <Button
                 className={stockOnline ? 'green btn btn-success' : 'red btn btn-success'}
-                onClick={OnlineAllTrigger}>
+                onClick={chendgeAllOnline}>
                 {stockOnline ? 'All on' : 'All off'}
                 </Button> 
                 </p>

@@ -9,8 +9,12 @@
         "Coffee ",
         "Hot Drinks "
       ],
-      "online": false,
-      "delivery": true
+      "online": true,
+      "delivery": false,
+      "updateData": {
+        "id": 1,
+        "delivery": true
+      }
     },
     {
       "id": 2,
@@ -21,8 +25,8 @@
         "Coffee ",
         "Hot Drinks "
       ],
-      "online": false,
-      "delivery": true
+      "online": true,
+      "delivery": false
     },
     {
       "id": 3,
@@ -34,7 +38,7 @@
         "Hot Drinks"
       ],
       "online": true,
-      "delivery": true
+      "delivery": false
     },
     {
       "id": 4,
@@ -45,8 +49,8 @@
         "Coffee ",
         "Hot Drinks"
       ],
-      "online": false,
-      "delivery": true
+      "online": true,
+      "delivery": false
     },
     {
       "id": 5,
@@ -57,8 +61,8 @@
         "Tea",
         "Hot Drinks"
       ],
-      "online": false,
-      "delivery": true
+      "online": true,
+      "delivery": false
     },
     {
       "id": 6,
@@ -69,7 +73,7 @@
         "Tea",
         "Cold Drinks"
       ],
-      "online": false,
+      "online": true,
       "delivery": false
     }
   ],

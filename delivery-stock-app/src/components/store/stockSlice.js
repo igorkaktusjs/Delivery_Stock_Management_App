@@ -2,9 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHttp } from "../hook/useHttp";
 import axios from 'axios';
 
-
-
-
 const API_URL = 'http://localhost:3001/stock_product';
 
 const initialState = {
