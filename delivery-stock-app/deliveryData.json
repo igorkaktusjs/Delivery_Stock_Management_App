@@ -50,7 +50,7 @@
         "Hot Drinks"
       ],
       "online": true,
-      "delivery": false
+      "delivery": true
     },
     {
       "id": 5,
@@ -62,19 +62,29 @@
         "Hot Drinks"
       ],
       "online": true,
-      "delivery": false
+      "delivery": true
     },
     {
       "id": 6,
       "name": "Soho Bun",
-      "type": "food",
+      "type": "sweet",
       "tags": [
         "Drinks",
         "Tea",
         "Cold Drinks"
       ],
       "online": true,
-      "delivery": false
+      "delivery": true
+    },
+    {
+      "id": 7,
+      "name": "Cinnamon bun",
+      "type": "sweet",
+      "tags": [
+        "Sweet"
+      ],
+      "online": true,
+      "delivery": true
     }
   ],
   "filters": [

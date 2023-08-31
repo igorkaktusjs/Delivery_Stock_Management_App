@@ -3,9 +3,11 @@ import NotFoundModal from '../UI/NotFoundModal';
 import Spinner from '../UI/spinner';
 
 //style
+import './StockManagement.css'
 import styled from 'styled-components' 
 import Button from 'react-bootstrap/Button';
 import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill } from 'react-icons/bs'
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,8 +21,6 @@ import {
 
 const StockManagement = (props) => {
 
-
-
   const { searchProduct, currentFilterTag, currentData,stockOnline, stockDelivery} = useSelector(state => state.stock);
   const { filtersStock } = useSelector(state => state.filterStock);
 
@@ -28,7 +28,8 @@ const StockManagement = (props) => {
   const {
     data: getAllStock = [],
     isLoading,
-    isError
+    isError,
+    isSuccess
 }  = useGetAllStockQuery();
 
  const [triggerItemDelivery]  = useTriggerItemDeliveryMutation();
@@ -64,7 +65,8 @@ const filteredData = useMemo(() => {
       const renderStock = (arr) => {
         return arr.map(({id ,name ,type ,online ,delivery ,tags }) => {
           return (
-            <tr key={id}>
+            <CSSTransition in={isSuccess} key={id} timeout={900} classNames="item" unmountOnExit >
+              <tr key={id}>
                 <th scope="row">{name}</th>
                 <td>{type}</td>
                 <td className='tags'>{tags.map((tag,i) => (<p key={tag[i]}>{tag}</p>))}</td>
@@ -78,7 +80,8 @@ const filteredData = useMemo(() => {
                     className={delivery ? 'green btn btn-success' : 'red btn btn-success'}>
                     {delivery ? 'On' : 'Off'}
                     </Button></td>
-            </tr>
+            </tr>  
+          </CSSTransition>
         )
         } );
       }
@@ -86,12 +89,15 @@ const filteredData = useMemo(() => {
       const products = renderStock(filteredData);
 
       if ( products.length === 0) {
-        return <NotFoundModal/>
+        return (
+          <NotFoundModal/>
+        )
+    
       } 
 
       let renderData = '';
 
-      renderData = <div className='title-stock'>
+      renderData = <div className='title-stock height-after-filtered'>
       <table>
         <thead>
             <tr>
@@ -119,19 +125,21 @@ const filteredData = useMemo(() => {
         <tbody>
           {products}
         </tbody>
-        <tfoot>
+        <tfoot className='footer'>
                 <tr>
-                <td colSpan="3"><BsFillArrowLeftSquareFill/></td>
-                <td colSpan="0"><BsFillArrowRightSquareFill/></td>
+                {/* <td colSpan="3"><BsFillArrowLeftSquareFill/></td>
+                <td colSpan="0"><BsFillArrowRightSquareFill/></td> */}
                 </tr>
             </tfoot>
         </table>
     </div>
 
       return (
-        <Conteiner>
-          {renderData}
-        </Conteiner>
+        <TransitionGroup>
+          <Conteiner>
+            {renderData}
+          </Conteiner>
+        </TransitionGroup>
     )
   }
 
@@ -143,12 +151,15 @@ const Conteiner = styled.div `
     .title-stock{
         background: rgb(244, 242, 245, 0.9);
         margin: 1rem;
+        height: 180vh;
+        
     }
     
     caption{
         color: #000000;
         font-size: 1.3rem;
         padding: 1rem
+        
     }
 
     table{
@@ -159,6 +170,7 @@ const Conteiner = styled.div `
 
       thead th:nth-child(1) {
         width: 30%;
+        
       }
       
       thead th:nth-child(2) {
@@ -188,6 +200,11 @@ const Conteiner = styled.div `
         color: #000000;
         text-shadow: 1px 1px 1px black;
       }
+
+      tfoot {
+        border-bottom-style: hidden;
+      }
+      
 
       tbody tr:nth-child(odd) {
         background-color: rgba(242, 241, 241);

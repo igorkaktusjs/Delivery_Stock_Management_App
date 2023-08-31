@@ -1,0 +1,21 @@
+.item-enter {
+    opacity: 0;
+    animation: fade-in 500ms forwards;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: all 500ms;
+    animation: fade-in 500ms forwards;
+  }
+  .item-exit {
+    opacity: 1;
+    transition: all 900ms;
+    animation: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: all 800ms;
+  }
+
+  

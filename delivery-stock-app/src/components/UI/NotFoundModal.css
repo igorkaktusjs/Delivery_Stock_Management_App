@@ -1,0 +1,16 @@
+.item-not-found-enter {
+    opacity: 0 all 1000ms;
+    animation: fade-in 500ms forwards;
+  }
+  .item-not-found-enter-active {
+    opacity: 1;
+    transition: all 500ms;
+    animation: fade-in 500ms forwards;
+  }
+  .item-not-found-exit {
+    opacity: 3;
+    animation: fade-in 500ms forwards;
+  }
+  .item--not-foundexit-active {
+    opacity: 0;
+    animation: fade-in 500ms forwards;  }
