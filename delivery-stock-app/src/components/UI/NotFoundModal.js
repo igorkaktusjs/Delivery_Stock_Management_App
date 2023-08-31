@@ -12,7 +12,7 @@ const NotFoundModal = () => {
 
   let modalTrigger  = '';
 
-  if(currentData.length === 0  ){
+  if(currentData.length !== 0  ){
     modalTrigger =  
     <div className='not-found-modal text-center'> 
       <h3>Not Found</h3>

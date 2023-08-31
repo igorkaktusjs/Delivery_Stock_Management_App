@@ -13,7 +13,7 @@ export const apiSlice = createApi({
                 query(data) {
                     const { id, ...body } = data;
                     return {
-                      url: `/${id}`,
+                      url: `stock_product/${id}`,
                       method: 'PATCH',
                       body,
                     };
@@ -24,35 +24,16 @@ export const apiSlice = createApi({
                 query(data) {
                     const { id, ...body } = data;
                     return {
-                      url: `/${id}`,
+                      url: `stock_product/${id}`,
                       method: 'PATCH',
                       body,
                     };
                   },
                 invalidatesTags: ['Stock']
             }),
-            triggerAllOnline: builder.mutation({
-                query(data) {
-                    const { id, ...body } = data;
-                    return {
-                      url: `/${id}`,
-                      method: 'PATCH',
-                      body,
-                    };
-                  },
-                invalidatesTags: ['Stock']
-            })
-            ,
-            triggerStockOnline: builder.mutation({
-                query(data) {
-                    const { id, ...body } = data;
-                    return {
-                      url: `/stock`,
-                      method: 'PATCH',
-                      body,
-                    };
-                  },
-                invalidatesTags: ['Stock']
+            getCurrentData: builder.query({
+                query: () =>  '/stock_product', 
+                providesTags:['Stock']
             })
         }) 
 })
@@ -61,6 +42,5 @@ export const {
     useGetAllStockQuery,
     useTriggerItemDeliveryMutation, 
     useTriggerItemOnlineMutation,
-    useTriggerAllOnlineMutation,
-    useTriggerStockOnlineMutation
+    useGetCurrentDataQuery
 } = apiSlice;
