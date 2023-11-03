@@ -1,6 +1,5 @@
-# Delivery_Stock_Management_App
+# Delivery Stock Management App
 
-Bakery
 Bakery is a web-based application tailored to simplify inventory management for your coffee shop and bakery. Seamlessly integrated with your delivery app's API, Bakery ensures efficient tracking and updating of product availability to streamline the delivery process. If you're seeking to enhance your bakery's stock management and improve order fulfillment, Bakery is the ideal solution.
 
 Key Features:
